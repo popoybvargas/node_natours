@@ -15,17 +15,24 @@ const handleAUncaughtUnhandled = ( err, type = 'UNHANDLED REJECTION' ) =>
 	process.exit( 1 );
 };
 
-process.on( 'unhandledRejection', err => handleAUncaughtUnhandled( err ) );
-process.on( 'uncaughtException', err => handleAUncaughtUnhandled( err, 'UNCAUGHT EXCEPTION' ) );
-
 const app = require( './app' );
 
 // CONNECT TO DB
 require( './models/DBconnection' )();
 
 // START SERVER
-// const port = process.env.PORT || 8000;
 const port = process.env.PORT || 8000;
 const server = app.listen( port, () => {
 	console.log( `Listening at port ${port} ...` );
 } );
+
+process.on( 'unhandledRejection', err => handleAUncaughtUnhandled( err ) );
+process.on( 'uncaughtException', err => handleAUncaughtUnhandled( err, 'UNCAUGHT EXCEPTION' ) );
+process.on( 'SIGTERM', () =>
+{
+	console.log( '👋🏼 SIGTERM RECEIVED. Shutting down gracefully...' );
+	server.close( () =>
+	{
+		console.log( '💥 Process terminated!' );
+	});
+});
