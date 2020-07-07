@@ -1,0 +1,18 @@
+doctype html
+html
+	head
+		//- interpolation: outputs an vaiable's vaue with the use of #{}
+		title Natours | #{tour}
+		link(rel="stylesheet", href="css/style.css")
+		link(rel="shortcut icon", href="img/favicon.png", type="image/x-icon")
+	
+	body
+		//- buffered code: preceded by an equal sign + a space => outputs objects from backend
+		h1= tour
+		h2= user.toUpperCase()
+		//- h1 The Park Camper
+
+		//- unbuffered code: preceded by the dash-line => executes javascript codes
+		- const x = 8;
+		h3= 2 * x
+		p This is just some text.
