@@ -54,7 +54,7 @@ app.use( hpp(
 {
 	whitelist: [ 'duration', 'ratingsQuantity', 'ratingsAverage', 'maxGroupSize', 'difficulty', 'price' ]
 }));	// prevent (HTTP) parameter pollution
-// app.use( compression );	// compresses text responses before they're sent to the client
+app.use( compression() );	// compresses text responses before they're sent to the client
 app.use( ( req, res, next ) =>	// test/custom middleware
 {
 	req.requestTime = new Date().toISOString();

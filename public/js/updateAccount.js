@@ -6,7 +6,7 @@ export const updateAccount = async ( data, type, hasPhoto = false ) =>
 {
 	try
 	{
-		let url = 'http://localhost:3000/api/v1/users/';
+		let url = '/api/v1/users/';
 		url += ( type === 'password' ) ? 'update-my-password' : 'update-me';
 
 		const res = await axios( { method: 'PATCH', url, data });
