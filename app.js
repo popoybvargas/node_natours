@@ -8,6 +8,7 @@ const morgan = require( 'morgan' );
 const rateLimit = require( 'express-rate-limit' );
 const xss = require( 'xss-clean' );
 const cookieParser = require( 'cookie-parser' );
+const bodyParser = require( 'body-parser' );
 const compression = require( 'compression' );
 const cors = require( 'cors' );
 
@@ -49,7 +50,7 @@ const limiter = rateLimit(
 });
 app.use( '/api', limiter );	// limit requests from sme IP
 
-app.post( 'webhook-checkout', app.raw( { type: 'application/json' } ), bookingController.webhookCheckout );	// body comes from stripe - should be in raw form, not JSON
+app.post( 'webhook-checkout', bodyParser.raw( { type: 'application/json' } ), bookingController.webhookCheckout );	// body comes from stripe - should be in raw form, not JSON
 
 app.use( express.json( { limit: '10kb' }) ); // parser - reading data from body into req.body
 app.use( express.urlencoded( { extended: true, limit: '10kb' } ) );	// parse form data into req.body
