@@ -173,7 +173,6 @@ exports.getToursWithin = catchAsync( async ( req, res, next ) =>
 	exports.radius = unit === 'km' ? distance / 6378.1 : distance / 3963.2;	// divisor is earth's radius
 
 	exports.tours = await Tour.find( { startLocation: { $geoWithin: { $centerSphere: [[ lng, lat ], radius ] } } } );
-	console.log( distance, latlng, unit );
 
 	res.status( 200 ).json(
 	{

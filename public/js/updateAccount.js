@@ -1,7 +1,12 @@
 import axios from 'axios';
 import { showAlert } from './alerts';
 
-// type is either 'password' or 'profile'
+/**
+ * 
+ * @param {object} data 
+ * @param {string} type either 'password' or 'profile'
+ * @param {boolean} hasPhoto 
+ */
 export const updateAccount = async ( data, type, hasPhoto = false ) =>
 {
 	try

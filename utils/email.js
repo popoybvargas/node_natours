@@ -10,7 +10,6 @@ module.exports = class email
 		this.firstName = user.name.split( ' ' )[ 0 ];
 		this.url = url;
 		this.from = `Popoy Vargas <${process.env.EMAIL_FROM}>`;
-		console.log( this.from );
 	}
 
 	newTransport()
@@ -60,7 +59,6 @@ module.exports = class email
 			html,
 			text: htmlToText.fromString( html )
 		};
-		console.log( this.from, this.to );
 		// 3. create a transport and send email
 		await this.newTransport().sendMail( mailOptions );
 	}
