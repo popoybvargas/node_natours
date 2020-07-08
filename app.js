@@ -18,6 +18,7 @@ const tourRouter = require( './routes/tourRoutes' );
 const userRouter = require( './routes/userRoutes' );
 const reviewRouter = require( './routes/reviewRoutes' );
 const bookingRouter = require( './routes/bookingRoutes' );
+const bookingController = require( './controllers/bookingController' );
 const viewRouter = require( './routes/viewRoutes' );
 
 const app = express();
@@ -47,6 +48,9 @@ const limiter = rateLimit(
 	message: 'Too many requests from this IP. Please try again in an hour.'
 });
 app.use( '/api', limiter );	// limit requests from sme IP
+
+app.route( 'webhook-checkout', express.raw( { type: 'application/json' } ), bookingController.webhookCheckout );	// body comes from stripe - should be in raw form, not JSON
+
 app.use( express.json( { limit: '10kb' }) ); // parser - reading data from body into req.body
 app.use( express.urlencoded( { extended: true, limit: '10kb' } ) );	// parse form data into req.body
 app.use( cookieParser() );	// parses cookies
