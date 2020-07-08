@@ -28,7 +28,7 @@ app.set( 'view engine', 'pug' );
 app.set( 'views', path.join( __dirname, 'views' ) );
 
 // GLOBAL MIDDLEWARES
-app.use( cors() );	// implement CORS
+app.use( cors() );	// implement CORS - works for simple requests, i.e. GET & POST
 // Access-Control-Allow_Origin *
 // access api.natours.com from front-end: natours.com
 // app.use( cors(
@@ -36,7 +36,7 @@ app.use( cors() );	// implement CORS
 // 	origin: 'https://www.natours.com'
 // }));
 app.options( '*', cors() );	// allow CORS for complex requests, e.g. PUT, PATCH, DELETE, or set non-standard headers
-// app.options( '/api/v1/tours/:id', cors() );	// allow complex requests to specific endpoint
+// app.options( '/api/v1/tours/:id', cors() );	// allow complex requests only to specific endpoint
 app.use( express.static( path.join( __dirname, 'public' ) ) );	// serving static files
 app.use( helmet() );	// set security HTTP headers
 if ( process.env.NODE_ENV === 'development' ) { app.use( morgan( 'dev' ) ); }	// development logging
