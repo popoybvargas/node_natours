@@ -9,11 +9,15 @@ export const hideAlert = () =>
 	}
 };
 
-// type is either 'success' of 'error'
-export const showAlert = ( type, message ) =>
+/**
+ * 
+ * @param {string} type either 'success' or 'error'
+ * @param {string} message to be displayed as an alert
+ */
+export const showAlert = ( type, message, time = 7 ) =>
 {
 	hideAlert();
 	const markup = `<div class="alert alert--${type}">${message}</div>`;
 	document.querySelector( 'body' ).insertAdjacentHTML( 'afterbegin', markup );
-	window.setTimeout( hideAlert, 5000 );
+	window.setTimeout( hideAlert, time * 1000 );
 };

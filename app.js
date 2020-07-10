@@ -49,7 +49,7 @@ const limiter = rateLimit(
 });
 app.use( '/api', limiter );	// limit requests from sme IP
 
-app.post( '/webhook-checkout', express.raw( { type: 'application/json' } ), bookingController.webhookCheckout );	// body comes from stripe - should be in raw form, not JSON
+app.post( '/webhook-checkout', express.raw( { type: 'application/json' } ), bookingController.webhookCheckout );	// body comes from stripe - should be in raw form (as a stream), not JSON
 
 app.use( express.json( { limit: '10kb' }) ); // parser - reading data from body into req.body
 app.use( express.urlencoded( { extended: true, limit: '10kb' } ) );	// parse form data into req.body

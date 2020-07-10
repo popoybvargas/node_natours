@@ -6,6 +6,8 @@ const controller = require( '../controllers/viewController' );
 
 const router = express.Router();
 
+router.use( controller.alerts );
+
 router.get( '/me', authController.protect, controller.getAccount );
 router.get( '/my-tours', authController.protect, controller.getMyTours );
 router.post( '/submit-user-data', authController.protect, controller.updateUserData );
